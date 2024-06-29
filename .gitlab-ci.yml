@@ -1,0 +1,13 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - docker build -t tnp167/docker-react -f Dockerfile.dev .
+
+test:
+  stage: test
+  script:
+    - docker run -e CI=true npm run test
