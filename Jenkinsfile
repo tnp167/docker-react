@@ -1,24 +1,15 @@
 pipeline {
-    agent {
-    label 'docker' 
-    }
-
+    agent any
 
     stages {
         stage('Build') {
             steps {
-                script {
-                    docker.build('tnp167/docker-react', '-f Dockerfile.dev .')
-                }
+                sh 'docker build -t test -f Dockerfile.dev .'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    docker.image('tnp167/docker-react').inside {
-                        sh 'npm run test'
-                    }
-                }
+                sh 'docker run -e CI=true test npm run test'
             }
         }
     }
