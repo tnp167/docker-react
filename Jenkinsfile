@@ -4,12 +4,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t test -f Dockerfile.dev .'
+                script {
+                    docker.build('test', '-f Dockerfile.dev .')
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run -e CI=true test npm run test'
+                script {
+                    docker.image('test').inside('-e CI=true') {
+                        sh 'npm run test'
+                    }
+                }
             }
         }
     }
