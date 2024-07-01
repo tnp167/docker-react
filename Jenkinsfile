@@ -5,14 +5,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build('test', '-f Dockerfile.dev .')
+                    docker.build('tnp167/docker-react', '-f Dockerfile.dev .')
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    docker.image('test').inside('-e CI=true') {
+                    docker.image('tnp167/docker-react').inside('-e CI=true') {
                         sh 'npm run test'
                     }
                 }
