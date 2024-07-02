@@ -6,6 +6,8 @@ pipeline {
             steps {
                 script {
                     docker.build('tnp167/docker-react', '-f Dockerfile.dev .')
+                    sh 'npm install'
+                    sh 'npm run start'
                 }
             }
         }
