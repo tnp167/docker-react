@@ -34,8 +34,8 @@ pipeline {
                     step([$class: 'AWSEBDeploymentBuilder',
                         credentialId: 'AWS_CREDENTIALS', 
                         awsRegion: "${env.AWS_REGION}",
-                        applicationName: "${env.AWS_APPLICATION_NAME}",
-                        environmentName: "${env.AWS_ENVIRONMENT_NAME}",
+                        applicationName: "${env.EB_APP_NAME}",
+                        environmentName: "${env.EB_ENV_NAME}",
                         keyPrefix: "${env.S3_BUCKET_PATH}",
                         rootObject: ".",
                         versionLabelFormat: "${env.AWS_VERSION_LABEL_FORMAT}"
